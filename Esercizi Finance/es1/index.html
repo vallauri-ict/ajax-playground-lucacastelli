@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Esercizio Finance</title>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="index.js"></script>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div id="wrapper">
+			<div class="row" style="margin-top:2%">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					<select id="Symbol" style="width: 210px;">
+						<option value="MSFT">Microsoft</option>
+						<option value="SNE">Sony</option>
+						<option value="BABA">Alibaba</option>
+						<option value="IBM">IBM</option>
+						<option value="XIACF">Xiaomi</option>
+					</select>
+					<br><br>
+					<div id="quote">
+						<table id="table">
+							<tr>
+								<th>Symbol</th>
+								<th>Last Trade</th>
+								<th>Last Trade Time</th>
+								<th>Change</th>
+								<th>Open</th>
+								<th>Previous Close</th>
+								<th>Day's Low</th>
+								<th>Day's High</th>
+								<th>Volume</th>
+							</tr>
+							<tr>
+								<td id="symbol"></td>
+								<td id="lastTrade"></td>
+								<td id="lastTradeTime"></td>
+								<td id="change"></td>
+								<td id="open"></td>
+								<td id="previousClose"></td>
+								<td id="daysLow"></td>
+								<td id="daysHigh"></td>
+								<td id="volume"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+		</div>
+	</body>
+</html>
