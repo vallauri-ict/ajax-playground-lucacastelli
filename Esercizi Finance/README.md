@@ -3,7 +3,7 @@
 
 ### Developed by Castelli Luca
 
-##Funzioni Principale
+Funzioni Principale
 ```javascript
 function getGlobalQuotes(symbol, n) {
 		let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=SD6OWO6PWBXQHBIU";
