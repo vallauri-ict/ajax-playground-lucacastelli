@@ -13,20 +13,9 @@ $(document).ready(function () {
 	let chart=$("#myChart").hide();
 	let myChart= new Chart(chart,{});
 	let Download=$("#download").hide();
-	let btnSign=$("#sign");
-	let signIco=$("#signIco");
 	let nCall=0;
 	
 	setInterval(function(){nCall=0}, 60000);
-	
-	if(localStorage.getItem("accessToken")==null) {
-		signIco.addClass("fas fa-sign-in-alt");		
-		btnSign.prop("title", "Sign In");
-	}
-	else {
-		signIco.addClass("fab fa-google");
-		btnSign.prop("title", "You are already signed in");
-	}
 	
 	$.getJSON("http://localhost:3000/companies", function(data){
 		for(let i=0;i<data.length;i++){
@@ -112,8 +101,6 @@ $(document).ready(function () {
 	
 	Download.on('click', function(){ Download.prop("href", document.getElementById("myChart").toDataURL("image/jpg")); });
 	
-	btnSign.on('click', function(){ if(localStorage.getItem("accessToken")==null) signIn(client_id,redirect_uri,scope); });
-	
 	function getGlobalQuotes(symbol, n) {
 		let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=SD6OWO6PWBXQHBIU";
 		$.getJSON(url, function (data) {
@@ -187,16 +174,6 @@ $(document).ready(function () {
 			return "rgb(" + Random(50, 200) + ", " + Random(50, 200) + ", " + Random(50, 200) + ")";
 	}
 
-	function signIn(client_id,redirect_uri,scope){		 
-	   // the actual url to which the user is redirected to 
-	   let url = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri="+redirect_uri
-	   +"&prompt=consent&response_type=code&client_id="+client_id+"&scope="+scope
-	   +"&access_type=offline";
-
-	   // this line makes the user redirected to the url
-	   window.location = url;
-	} 
-
 	let Upload = function (file) { this.file = file; };
 
 	Upload.prototype.getType = function() {
@@ -215,7 +192,7 @@ $(document).ready(function () {
 		let that = this;
 		let formData = new FormData();
 
-		// add assoc key values, this will be posts values
+		
 		formData.append("file", this.file, this.getName());
 		formData.append("upload_file", true);
 
