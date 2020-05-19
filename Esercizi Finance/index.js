@@ -1,21 +1,16 @@
 "use strict";
 
 $(document).ready(function () {
-    
-	const client_id = "625340076437-h3c3ujfof3rm70gstpph9r6ur2be6d69.apps.googleusercontent.com"
-    const redirect_uri = "http://127.0.0.1:8080/index.html" 
-    const client_secret = "XS9W8XAsV7RKGckimcRabKft"; 
-    const scope = "https://www.googleapis.com/auth/drive";
-	
+
     let slctSymbol=$("#slctSymbol");
 	let slctSector=$("#slctSector");
 	let search=$("#search");
 	let chart=$("#myChart").hide();
 	let myChart= new Chart(chart,{});
 	let Download=$("#download").hide();
-	let nCall=0;
+	let Call=0;
 	
-	setInterval(function(){nCall=0}, 60000);
+	setInterval(function(){Call=0}, 60000);
 	
 	$.getJSON("http://localhost:3000/companies", function(data){
 		for(let i=0;i<data.length;i++){
@@ -28,11 +23,11 @@ $(document).ready(function () {
     });
 
     slctSymbol.on("change",function() {
-		if(nCall<5){
+		if(Call<5){
 			DeleteRow();
 			CreateRows(0);
 			getGlobalQuotes(this.value, 0);
-			nCall++;
+			Call++;
 		}
 		else{
 			alert("You can't do more than 5 call per minute!");
@@ -41,13 +36,13 @@ $(document).ready(function () {
     });
 
     search.on("keyup",function(){
-		if(nCall<5){
+		if(Call<5){
 			let str=search.val();
 			if(str.length>=2)
 			{
 				DeleteRow();
 				slctSymbol.prop("selectedIndex",-1);
-				getSymbolSearch(str);
+				getSearch(str);
 			}
 		}
 		else{
@@ -118,22 +113,17 @@ $(document).ready(function () {
 		);
 	}
 
-	function getSymbolSearch(keywords) {
+	function getSearch(keywords) {
 		let url = "https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + keywords + "&apikey=SD6OWO6PWBXQHBIU";
 		$.getJSON(url, function (data) {
 			let dataMatches=data["bestMatches"];
-			let length=5-nCall;
-			if(dataMatches.length<=5-nCall) length=dataMatches.length;
-			try{
+			let length=5-Call;
+			if(dataMatches.length<=5-Call) length=dataMatches.length;
 				for(let i=0;i<length; i++)
 				{					
 					CreateRows(i);
 					getGlobalQuotes(dataMatches[i]["1. symbol"], i);
-					nCall++;
-				}
-			}
-			catch(ex){
-					nCall=5;
+					Call++;
 				}
 		});
 	}
@@ -172,69 +162,5 @@ $(document).ready(function () {
 		}
 		else
 			return "rgb(" + Random(50, 200) + ", " + Random(50, 200) + ", " + Random(50, 200) + ")";
-	}
-
-	let Upload = function (file) { this.file = file; };
-
-	Upload.prototype.getType = function() {
-		localStorage.setItem("type",this.file.type);
-		return this.file.type;
-	};
-	
-	Upload.prototype.getSize = function() {
-		localStorage.setItem("size",this.file.size);
-		return this.file.size;
-	};
-	
-	Upload.prototype.getName = function() { return this.file.name; };
-	
-	Upload.prototype.doUpload = function () {
-		let that = this;
-		let formData = new FormData();
-
-		
-		formData.append("file", this.file, this.getName());
-		formData.append("upload_file", true);
-
-		$.ajax({
-			type: "POST",
-			beforeSend: function(request) { request.setRequestHeader("Authorization", "Bearer" + " " + localStorage.getItem("accessToken")); },
-			url: "https://www.googleapis.com/upload/drive/v2/files",
-			data:{ uploadType:"media" },
-			xhr: function () { return $.ajaxSettings.xhr(); },
-			success: function (data) { console.log(data); },
-			error: function (error) { console.log(error); },
-			async: true,
-			data: formData,
-			cache: false,
-			contentType: false,
-			processData: false,
-			timeout: 60000
-		});
-	};
-	
-	function dataURItoBlob(dataURI) {
-	  // convert base64 to raw binary data held in a string
-	  // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-	  let byteString = atob(dataURI.split(',')[1]);
-
-	  // separate out the mime component
-	  let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-	  // write the bytes of the string to an ArrayBuffer
-	  let ab = new ArrayBuffer(byteString.length);
-
-	  // create a view into the buffer
-	  let ia = new Uint8Array(ab);
-
-	  // set the bytes of the buffer to the correct values
-	  for (let i = 0; i < byteString.length; i++)
-		  ia[i] = byteString.charCodeAt(i);
-
-	  // write the ArrayBuffer to a blob, and you're done
-	  let blob = new Blob([ab], {type: mimeString});
-	  blob.name="ChartImage.jpg";
-	  //DriveApp.createFile(blob);
-	  return blob;
 	}
 });
