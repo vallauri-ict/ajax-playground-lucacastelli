@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Ajax Finance</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+		<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+		<script src="https://apis.google.com/js/api.js"></script>
+		<script src="index.js"></script>
+	</head>
+	<style>
+		::-webkit-scrollbar { display: none; }	
+		.fa-google{ color:blue; }
+		.fa-sign-in-alt{ color:red; }
+		.fa-download, .fa-upload{ color:white; }
+		body{
+            background-size: cover;
+            background-image: url(background.jpg);
+            background-repeat: no-repeat;
+			padding: 30px;
+		}
+		#title{
+            font-weight: bold;
+            text-align: center;
+            font-size: 60px;
+			width: 700px; 
+			height: 120px; 
+			margin: 0px auto;
+		}
+	</style>
+	<body>
+	<div id="title">Finance</div>
+		<div class="container-fluid" style="padding:0px;">
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<select class="form-control" id="slctSymbol" style="width: 150px;"> </select>
+				<input class="form-control mr-sm-2" type="text" id="search" placeholder="Search" style="margin-left: 73%;">	
+			</nav>
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6" style="padding:0;">
+					<br>
+					<div id="quote">
+						<table class="table table-bordered table-striped" id="table" style="background-color:white;">
+							<style>
+								th{ height: 60px; width:50px }
+								td{ height: 30px; width:50px }
+							</style>
+							<tr>
+								<th>Symbol</th>
+								<th>Last Trade</th>
+								<th>Last Trade Time</th>
+								<th>Change</th>
+								<th>Open</th>
+								<th>Previous Close</th>
+								<th>Day's Low</th>
+								<th>Day's High</th>
+								<th>Volume</th>
+							</tr>
+						</table>
+					</div>
+					<div>					
+						<p><b>Choose the sector:</b></p>
+						<select class="form-control" id="slctSector"></select>
+					</div>
+					<div style="background-color:white; margin-top:10px;">
+						<canvas id="myChart" width="650" height="420" style="margin-top: 20px"></canvas>
+						<a id="download" download="ChartImage.jpg" class="btn btn-primary float-left bg-flat-color-1" style="margin-right: 5px" title="Download chart">
+							<i class="fa fa-download"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col-sm-3"></div>
+			</div>
+		</div>
+	</body>
+</html>
