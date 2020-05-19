@@ -4,7 +4,7 @@
 ### Developed by Castelli Luca
 
 ##Funzioni Principale
-
+```javascript
 function getGlobalQuotes(symbol, n) {
 		let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=SD6OWO6PWBXQHBIU";
 		$.getJSON(url, function (data) {
@@ -36,3 +36,4 @@ $.getJSON("http://localhost:3000/sector", function(data){
         }
 		slctSector.prop("selectedIndex",-1);
     });
+```
