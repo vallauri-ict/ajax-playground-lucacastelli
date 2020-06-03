@@ -6,7 +6,7 @@ $(function () {
         let titolo=$("#titolo").text;
         let feat=$("#feat").text;
         let _inserisciDati = inviaRichiesta("post", "server/inserisciDati.php",{"nome": nome,"titolo":titolo,"feat":feat});
-            _inserisciDati.done(function(){
+        _inserisciDati.done(function(){
             alert("Dati inseriti correttamente");
             window.location.href("index.html");
         });

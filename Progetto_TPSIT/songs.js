@@ -18,11 +18,14 @@ $(function () {
 	_richiestaCanzoni.done(function (data) {
             let _salvaId=inviaRichiesta("get", "server/salvaId.php",{"id":1});
     _salvaId.done(function(ris){
-        console.log(ris);
-        Guest=ris['ris'];
+
     });
 		console.log(data)
 		_wrapper.show();
+        if(data['name']=="Guest")
+            Guest="si";
+        else
+            Guest="no";
         creaButtons(data);
         
             
@@ -55,10 +58,10 @@ $(function () {
         if(Guest=="no")
         {
             $("<div>", {
-			     "css": {"backround-color":"green","color":"white"},
-			     "text": "Browse"
-		      }).appendTo(_divSongs).on("click",function(){
-                let _salvaId=inviaRichiesta("get", "server/salvaId.php",{"id":1});
+			    "text": "Browse",
+                "id":"Browse"
+            }).appendTo(_divSongs).on("click",function(){
+                let _salvaId=inviaRichiesta("get", "server/cambiaUtente.php",{"id":1,"User":"Guest"});
                 window.location.href="index.html";
                 }); 
         }

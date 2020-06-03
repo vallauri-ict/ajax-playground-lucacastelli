@@ -10,12 +10,12 @@
 	$id = $_SESSION["CodCantanti"];
 	
 	// 3. Query
-    $sql="select username from cantanti where codCantanti = $id;";
-	$user = _eseguiQuery($con, $sql);
+    //$sql="select username from cantanti where codCantanti = $id;";
+	$user = $_SESSION["User"];
 	$sql = "SELECT nome, feat FROM canzoni WHERE codCantanti = $id;";
     $data = _eseguiQuery($con, $sql);
 
-    $data = array("name"=>$user[0]["username"], "data"=>$data);
+    $data = array("name"=>$user, "data"=>$data);
 	echo json_encode($data);
     
 	// 4. close

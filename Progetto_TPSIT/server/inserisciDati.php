@@ -25,10 +25,10 @@
     $titolo=$_REQUEST["titolo"];
     $feat=$_REQUEST["feat"];    
     
-    $sql = "INSERT INTO cantanti(nome,password) VALUES ("$nome",5f4dcc3b5aa765d61d8327deb882cf99)";
+    $sql = "INSERT INTO cantanti(username,password) VALUES ("$nome",5f4dcc3b5aa765d61d8327deb882cf99)";
     $data=_eseguiQuery($con, $sql);
 
-    $sql = "INSERT INTO canzoni(titolo,feat,codCantanti) VALUES ("$titolo","$feat","23")";
+    $sql = "INSERT INTO canzoni(titolo,feat,CodCantanti) VALUES ("$titolo","$feat","23")";
     $data=_eseguiQuery($con, $sql);       
     
     echo json_encode(array("ris"=>"ok"));
