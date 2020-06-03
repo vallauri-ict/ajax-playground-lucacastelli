@@ -38,19 +38,21 @@
     $num = $con->real_escape_string($_REQUEST["num"]);
 
     // 3. Query per persone inserite
-    $sql = "SELECT CodCantanti FROM cantanti WHERE username='$nome';";
-    $data = _eseguiQuery($con,$sql);
+    $sql = "SELECT * FROM cantanti WHERE username='$nome';";
+    $date = _eseguiQuery($con,$sql);
+    
     
     session_start();
     $user=$_SESSION["User"];
 
-    if((count($data)>0)&&(($nome)!=$user))
+    if((count($date)>0)&&(($nome)!=$user))
     {
-        die ("Username già in uso."); 
+        die ("Username già in uso.");
+        $con->close();
     }
     else
     {
-        if($user=="Guest")
+        if(($user=="Guest")||($nome!=$user))
         {
             $sql = "INSERT INTO cantanti(CodCantanti,username,password) VALUES ('$num','$nome','5f4dcc3b5aa765d61d8327deb882cf99')";
             $data=_eseguiQuery($con, $sql);
@@ -60,12 +62,11 @@
         }
         else
         {
-            $sql = "INSERT INTO canzoni(nome,feat,CodCantanti) VALUES ('$titolo','$feat','$data')";
+            $id=$date[0]['CodCantanti'];
+            $sql = "INSERT INTO canzoni(nome,feat,CodCantanti) VALUES ('$titolo','$feat','$id')";
             $ris=_eseguiQuery($con, $sql);
         }
     }
-
-
     echo $ris;
     $con->close();
 

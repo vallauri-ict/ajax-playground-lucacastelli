@@ -10,7 +10,6 @@
 	$id = $_SESSION["CodCantanti"];
 	
 	// 3. Query
-    //$sql="select username from cantanti where codCantanti = $id;";
 	$user = $_SESSION["User"];
 	$sql = "SELECT nome, feat FROM canzoni WHERE codCantanti = $id;";
     $data = _eseguiQuery($con, $sql);

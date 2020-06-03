@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 02, 2020 alle 21:48
+-- Creato il: Giu 03, 2020 alle 18:18
 -- Versione del server: 10.4.11-MariaDB
 -- Versione PHP: 7.2.31
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `cantanti`
 --
+CREATE DATABASE IF NOT EXISTS `cantanti` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `cantanti`;
 
 -- --------------------------------------------------------
 
@@ -119,8 +121,11 @@ INSERT INTO `canzoni` (`CodCanzoni`, `Nome`, `Feat`, `CodCantanti`) VALUES
 (41, 'Forte e Chiaro', '', '19'),
 (42, 'Cracovia pt.3', '', '20'),
 (43, 'Il passo', 'Samurai Jay', '21'),
-(44, 'Il primo', '', '22'),
-(45, 'Nisida', '', '19');
+(45, 'Nisida', '', '19'),
+(57, 'Il primo', '', '22'),
+(72, 'Come me', 'Nayt', '4'),
+(73, 'Lingerie', 'Sfera Ebbasta', '9'),
+(77, 'Sabbie d\'oro', '', '12');
 
 --
 -- Indici per le tabelle scaricate
@@ -146,13 +151,13 @@ ALTER TABLE `canzoni`
 -- AUTO_INCREMENT per la tabella `cantanti`
 --
 ALTER TABLE `cantanti`
-  MODIFY `CodCantanti` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `CodCantanti` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
 
 --
 -- AUTO_INCREMENT per la tabella `canzoni`
 --
 ALTER TABLE `canzoni`
-  MODIFY `CodCanzoni` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `CodCanzoni` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

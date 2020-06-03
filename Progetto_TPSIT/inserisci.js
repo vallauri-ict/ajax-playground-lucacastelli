@@ -20,9 +20,13 @@ $(function () {
         let feat=$("#feat").val();
         console.log(nome+" "+titolo+" "+feat);
         let _inserisciDati = inviaRichiesta("get", "server/inserisciDati.php",{"nome": nome,"titolo":titolo,"feat":feat,"num":parseInt(lenght)+1});
-        _inserisciDati.done(function(){
+        _inserisciDati.done(function(data){
+            console.log(data);
             alert("Dati inseriti correttamente");
-            window.location.href="index.html";
+            let _cambiaUtente=inviaRichiesta("post","server/cambiaUtente.php",{"id":1,"User":"Guest"});
+            _cambiaUtente.done(function(){
+                 window.location.href="index.html";
+            });
         });
         _inserisciDati.fail(error);
     });
