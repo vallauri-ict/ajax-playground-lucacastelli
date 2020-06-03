@@ -50,7 +50,7 @@ $(function () {
 			         "class": "delete",
 			         "text": "X"
 		          }).appendTo(_divSongs).on("click",function(){
-                delete(this);
+                deleteSong(this);
                 });     
             }
  
@@ -63,13 +63,27 @@ $(function () {
             }).appendTo(_divSongs).on("click",function(){
                 let _salvaId=inviaRichiesta("get", "server/cambiaUtente.php",{"id":1,"User":"Guest"});
                 window.location.href="index.html";
-                }); 
+                });
+             $("<div>", {
+			 "text": "Inserisci la tua musica",
+             "css":{"background-color":"green","color":"white","width":"100%","font-size":"1.5em","text-align":"center","height":"20%","font-weight":"bold","border-radius":"5px"}
+                }).appendTo(_divSongs).on("click",function(){
+                    window.location.href="inserisci.html";
+                });
         }
     }
         
         
     });
     
+    function deleteSong(sender)
+    {
+        let _delete=inviaRichiesta("post","server/delete.php",{"name":sender.getAttribute("id")});
+        _delete.done(function(){
+           window.location.href="index.html"; 
+        });
+        _delete.fail(error);
+    }
 
 	$("#btnLogout").on("click", function(){
 		let _richiestaLogout = inviaRichiesta("POST", "server/logout.php");		
